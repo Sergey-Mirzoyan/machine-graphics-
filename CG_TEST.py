@@ -37,7 +37,6 @@ TuangL = Label(Turn, text='Угол', font='Verdana 14').grid(row=2, column=0, c
 TrxV = Entry(Transfer, width=5)
 TryV = Entry(Transfer, width=5)
 
-
 # Масштабирование
 SxV = Entry(Scale, width=5)
 SyV = Entry(Scale, width=5)
@@ -88,14 +87,11 @@ def create():
 
     for i in range(len(x)):
          Head.append([x[i], y[i]])
-    
-##    Head = [dx - 100, dy - 25, dx - 35, dy + 25]
     Eye = [dx - 80, dy - 20, dx - 70, dy - 10]
     Plavnik1 = [[dx - 35,dy + 35], [dx, dy + 70], [dx + 70, dy + 70],[dx + 35, dy + 35]]
     Plavnik2 = [[dx - 35,dy - 35], [dx, dy - 70], [dx + 70, dy - 70],[dx + 35, dy - 35]]
     Plavnik3 = [[dx + 100,dy], [dx + 150, dy - 40], [dx + 125, dy],[dx + 150, dy + 40]]
     Mouth = [dx - 85, dy, dx - 65, dy]
-##    Mouth = [dx - 100, dy - 40, dx + 100, dy + 40]
     Begin_body = Body.copy()
     Begin_eye = Eye.copy()
     Begin_mouth = Mouth.copy()
@@ -112,40 +108,30 @@ def draw():
     Canv.delete('all')
 
     Canv.create_polygon(Plavnik1, fill='#e6e6fa', outline='black')
-##    print("1 check")
     Canv.create_polygon(Plavnik2, fill='#e6e6fa', outline='black')
-##    print("2 check")
     Canv.create_polygon(Body,fill='#e6e6fa', outline='black')
-##    print("3 check")
     Canv.create_polygon(Head,fill='#e6e6fa', outline='black')
-##    print("4 check")
     Canv.create_oval(Eye,fill='#e6e6fa', outline='black')
-##    print("5 check")
     Canv.create_polygon(Plavnik3, fill='#e6e6fa', outline='black')
-##    print("6 check")
     Canv.create_line(Mouth)
-##    print("7 check")
-##
-##    Canv.create_polygon(Points, fill='#ffffff', outline='black')
-
 
     Canv.create_line(0, 3, 800, 3)
-    Canv.create_text(100, 585, text='100')
-    Canv.create_text(200, 585, text='200')
-    Canv.create_text(300, 585, text='300')
-    Canv.create_text(400, 585, text='400')
-    Canv.create_text(500, 585, text='500')
-    Canv.create_text(600, 585, text='600')
-    Canv.create_text(700, 585, text='700')
-    Canv.create_text(790, 585, text='X')
+    Canv.create_text(100, 10, text='100')
+    Canv.create_text(200, 10, text='200')
+    Canv.create_text(300, 10, text='300')
+    Canv.create_text(400, 10, text='400')
+    Canv.create_text(500, 10, text='500')
+    Canv.create_text(600, 10, text='600')
+    Canv.create_text(700, 10, text='700')
+    Canv.create_text(790, 10, text='X')
     Canv.create_line(3, 0, 3, 600)
-    Canv.create_text(16, 100, text='500')
-    Canv.create_text(16, 200, text='400')
+    Canv.create_text(16, 100, text='100')
+    Canv.create_text(16, 200, text='200')
     Canv.create_text(16, 300, text='300')
-    Canv.create_text(16, 400, text='200')
-    Canv.create_text(16, 500, text='100')
-    Canv.create_text(12, 585, text='0')
-    Canv.create_text(12, 10, text='Y')
+    Canv.create_text(16, 400, text='400')
+    Canv.create_text(16, 500, text='500')
+    Canv.create_text(12, 585, text='Y')
+    Canv.create_text(12, 10, text='0')
     Canv.create_line(0, 596, 800, 596)
     Canv.create_line(801, 0, 801, 600)
     
@@ -155,7 +141,7 @@ def Transfer_ep():
     code = 0
     try:
         Trx = float(TrxV.get())
-        Try = (-1)*float(TryV.get())
+        Try = float(TryV.get())
     except ValueError:
         messagebox.showerror('Ошибка', 'Некорректный ввод коэффициентов перемещения.')
         code = 1
@@ -219,7 +205,6 @@ def Transfer_ep():
             x = element[0] + Trx
             y = element[1] + Try
             Plavnik3.append([x, y])
-
         draw()
 
 def Scale_ep():
@@ -228,7 +213,7 @@ def Scale_ep():
     code = 0
     try:
         Xc = float(SxV.get())
-        Yc = 800 - float(SyV.get())
+        Yc = float(SyV.get())
     except ValueError:
         messagebox.showerror('Ошибка', 'Некорректный ввод центра масштабирования.')
         code = 1
@@ -269,7 +254,6 @@ def Scale_ep():
         Eye.append(XX2)
         Eye.append(YY2)
 
-
         Back_mouth.clear()
         Back_mouth = Mouth.copy()
         Mouth.clear()
@@ -305,8 +289,6 @@ def Scale_ep():
             x = kx*element[0] + (1-kx)*Xc
             y = ky*element[1] + (1-ky)*Yc
             Plavnik3.append([x, y])
-
-
         draw()
 
 def Turn_ep():
@@ -328,9 +310,6 @@ def Turn_ep():
 
     if code == 0:
         teta = radians(teta)
-        #teta= degrees(teta)
-
-######################################################        
         Back_body.clear()
         Back_body = Body.copy()
         Body.clear()
@@ -364,7 +343,6 @@ def Turn_ep():
         Eye.append(YYC - DELTA_Y/2)
         Eye.append(XXC + DELTA_X/2)
         Eye.append(YYC + DELTA_Y/2)
-
 
         Back_mouth.clear()
         Back_mouth = Mouth.copy()
@@ -468,7 +446,6 @@ ScaleButton = Button(Buttons, text='Масштаб', font='Verdana 14', command=
 TurnButton = Button(Buttons, text='Поворот', font='Verdana 14', command=Turn_ep, width=8)                            # +
 BackButton = Button(Buttons, text='Назад', font='Verdana 14', command=Back_ep, width=12, height=1)                   # +
 BeginButton = Button(Buttons, text='В начало', font='Verdana 14', command=Begin_ep, width=12, height=1)              # +
-
 
 Transfer.grid(row=0, column=0, columnspan=2)
 TransferButton.grid(row=1, column=0, columnspan=2)
